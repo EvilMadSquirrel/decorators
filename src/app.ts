@@ -1,11 +1,12 @@
-function Logger(message: string) {
-  return function (constructor: Function) {
-    console.log(message);
-    console.log(constructor);
+function WithTemplate(template: string, hookID: string) {
+  return function (_: Function) {
+    const el = document.querySelector(`#${hookID}`);
+    if (el) {
+      el.innerHTML = template;
+    }
   };
 }
-
-@Logger("Logging Person")
+@WithTemplate("<h1>Hello from Decorator</h1>", "app")
 class Person {
   name = "Serega";
   constructor() {
